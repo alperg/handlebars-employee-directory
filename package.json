@@ -1,0 +1,22 @@
+{
+  "name": "handlebars-employees",
+  "version": "1.0.0",
+  "description": "",
+  "main": "parser.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "asciiart-logo": "^0.2.6",
+    "axios": "^0.19.2",
+    "console.table": "^0.10.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "moment": "^2.24.0",
+    "mysql": "^2.18.1",
+    "ora": "^4.0.3"
+  }
+}
