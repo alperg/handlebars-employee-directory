@@ -37,17 +37,18 @@ router.get("/api/employees/:id?", (req, res) => {
 });
 
 router.post("/api/employees", (req, res) => {
-  const sql = "insert into employees (avatar, firstName, lastName, email, gender, department, startDate) values (?)";
-  const emp = [
-    req.body.avatar,
-    req.body.firstName,
-    req.body.lastName,
-    req.body.email,
-    req.body.gender,
-    req.body.department,
-    req.body.startDate
-  ];
-  const query = conn.query(sql, [emp], (err, data) => {
+  const newEmp = {
+    avatar: req.body.avatar,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    gender: req.body.gender,
+    department: req.body.department,
+    startDate: req.body.startDate
+  };
+  const sql = "insert into employees set ?";
+
+  const query = conn.query(sql, [newEmp], (err, data) => {
     if(err) {
       console.log(err);
       return res.status(500).end();
