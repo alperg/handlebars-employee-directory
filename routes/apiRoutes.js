@@ -26,7 +26,13 @@ router.get("/api/employees/:id?", (req, res) => {
     console.log(query.sql);
   } else {
     const query = conn.query("select * from employees", (err, data) => {
-      res.json(parseData(data));
+      if(err) {
+        console.log(err);
+        return status(500).end();
+      } else if(!data.length) {
+        return res.json([]);
+      }
+      return res.json(parseData(data));
     });
     console.log(query.sql);
   }
@@ -44,7 +50,7 @@ router.post("/api/employees", (req, res) => {
   };
   const sql = "insert into employees set ?";
 
-  const query = conn.query(sql, [newEmp], (err, data) => {
+  const query = conn.query(sql, [newEmp], (err) => {
     if(err) {
       console.log(err);
       return res.status(500).end();
@@ -55,7 +61,7 @@ router.post("/api/employees", (req, res) => {
 });
 
 router.put("/api/employees/:id", (req, res) => {
-  const query = conn.query("update employees set ? where id=?", [req.body, req.params.id], (err, data) => {
+  const query = conn.query("update employees set ? where id=?", [req.body, req.params.id], (err) => {
     if(err) {
       console.log(err);
       return res.status(500).end();
@@ -66,7 +72,7 @@ router.put("/api/employees/:id", (req, res) => {
 });
 
 router.delete("/api/employees/:id", (req, res) => {
-  const query = conn.query("delete from employees where id=?", [req.params.id], (err, data) => {
+  const query = conn.query("delete from employees where id=?", [req.params.id], (err) => {
     if(err) {
       console.log(err);
       return res.status(500).end();
