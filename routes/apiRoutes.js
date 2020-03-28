@@ -1,4 +1,3 @@
-require("console.table");
 const moment = require("moment");
 const express = require("express");
 const router = express.Router();
@@ -20,16 +19,13 @@ router.get("/api/employees/:id?", (req, res) => {
         console.log(err);
         return status(500).end();
       } else if(!data.length) {
-        // console.log(data);
         return res.json([]);
       }
-      // console.table(parseData(data));
       return res.json(parseData(data));
     });
     console.log(query.sql);
   } else {
     const query = conn.query("select * from employees", (err, data) => {
-      // console.table(parseData(data));
       res.json(parseData(data));
     });
     console.log(query.sql);
